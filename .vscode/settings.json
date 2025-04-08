@@ -1,0 +1,11 @@
+{
+    "python.analysis.extraPaths": [
+        "./cocotb/model"
+    ],
+    "python.analysis.autoFormatStrings": true,
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

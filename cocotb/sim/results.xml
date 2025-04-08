@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1744078012" />
+    <testcase name="multiply_test" classname="test_matrix_multiplier" file="D:\mydata\git_resp\PyPractice\cocotb\sim\test_matrix_multiplier.py" lineno="155" time="3.0300590991973877" sim_time_ns="60030.001" ratio_time="19811.49510116847" />
+  </testsuite>
+</testsuites>

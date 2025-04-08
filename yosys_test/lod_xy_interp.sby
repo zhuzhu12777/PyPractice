@@ -1,0 +1,14 @@
+[options]
+mode bmc
+depth 100
+
+[engines]
+smtbmc
+
+[script]
+read -define LOD_SBY
+read -formal lod_xy_interp.v
+prep -top LOD_XY_INTERP
+
+[files]
+lod_xy_interp.v

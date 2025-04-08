@@ -14,13 +14,31 @@ from cocotb.types import LogicArray, Range
 from cocotb.runner import get_runner
 from cocotb.result import TestSuccess, TestFailure
 
-
+async def reset_dut(rstn: SimHandleBase, duration: int) -> None:
+    """Reset the DUT for a given duration"""
+    rstn.value = 0
+    await Timer(duration, units='ns')
+    rstn.value = 1
 
 @cocotb.test()
 async def test(dut):
     dut.valid_i._log.info("Valid input signal")
     dut.valid_i.value = 1
 
+@cocotb.test()
+async def test_act_during_reset(dut):
+    """While reset is active, toggle signals"""
+    # "Clock" is a built in class for toggling a clock signal
+    cocotb.start_soon(Clock(dut.clk_i, 1, units='ns').start())
+    # reset_dut is a function -
+    # part of the user-generated "uart_tb" class
+    # run reset_dut immediately before continuing
+    await cocotb.start(reset_dut(dut.reset_i, 20))
+
+    await Timer(10, units='ns')
+    print("Reset is still active: %d" % dut.reset_i)
+    await Timer(15, units='ns')
+    print("Reset has gone inactive: %d" % dut.reset_i)
 
 def test_runner():
     hdl_toplevel_lang = os.getenv("HDL_TOPLEVEL_LANG", "verilog")

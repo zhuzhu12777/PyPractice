@@ -25,8 +25,14 @@ dut.my_signal.value = Freeze()
 ## Logging
 `dut._log.info("Test multiplication operations")`
 
+## Concurrent Execution 并发执行
+```
+cocotb.start_soon(Clock(dut.clk, 1, units='ns').start())
+await cocotb.start(tb.reset_dut(dut.rstn, 20))
+```
 
-
+## cocotb.triggers.ClockCycles(signal, num_cycles, rising=True)
+在信号从 0 到 1 的 num_cycles 次转换后触发。
 
 
 
